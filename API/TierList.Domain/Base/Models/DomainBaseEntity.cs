@@ -1,4 +1,4 @@
-namespace BackTierList.TierListAPI.Domain.Models;
+namespace API.TierList.Domain.Models;
 
 using System;
 using System.Linq.Expressions;
