@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zt3AYWLcnkI=",
+  "dgSpecHash": "RPulg7he13Y=",
   "success": true,
-  "projectFilePath": "D:\\Projetos\\TierList\\TierListAPI\\ToDoAPI.csproj",
+  "projectFilePath": "D:\\Projetos\\TierList\\TierListAPI\\TierListAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\amilt\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\amilt\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

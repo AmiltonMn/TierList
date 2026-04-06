@@ -6,5 +6,5 @@ public class User : BaseEntityModel<Guid>
     public string? Bio { get; set; }
     public string? ProfileImage { get; set; }
     public string? BannerImage { get; set; }
-    public ICollection<TierListTemplate> TierListTemplates { get; set; } = [];
+    public List<TierListTemplate> TierListTemplates { get; set; } = [];
 }

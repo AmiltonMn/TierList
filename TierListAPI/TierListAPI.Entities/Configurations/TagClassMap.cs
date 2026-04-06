@@ -4,13 +4,22 @@ using TierListAPI.Entitites.Models;
 namespace TierListAPI.Entities.Configurations;
 public static class TagClassMap
 {
-    public static void Map(ModelBuilder modelBuilder)
+    public static void Map(this ModelBuilder modelBuilder)
+        => modelBuilder.Entity<Tag>(builder =>
     {
-        modelBuilder.Entity<Tag>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Label).IsRequired();
-            entity.Property(e => e.Color).IsRequired();
-        });
-    }
+        builder.ToTable("tb_tags");
+
+        builder.HasKey(t => t.Id)
+            .HasName("tag_id");
+
+        builder.Property(t => t.Label)
+            .HasColumnName("label")
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(t => t.Color)
+            .HasColumnName("color")
+            .IsRequired()
+            .HasMaxLength(7);
+    });
 }

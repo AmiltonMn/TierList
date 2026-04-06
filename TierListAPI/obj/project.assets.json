@@ -1214,9 +1214,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projetos\\TierList\\TierListAPI\\ToDoAPI.csproj",
-      "projectName": "ToDoAPI",
-      "projectPath": "D:\\Projetos\\TierList\\TierListAPI\\ToDoAPI.csproj",
+      "projectUniqueName": "D:\\Projetos\\TierList\\TierListAPI\\TierListAPI.csproj",
+      "projectName": "TierListAPI",
+      "projectPath": "D:\\Projetos\\TierList\\TierListAPI\\TierListAPI.csproj",
       "packagesPath": "C:\\Users\\amilt\\.nuget\\packages\\",
       "outputPath": "D:\\Projetos\\TierList\\TierListAPI\\obj\\",
       "projectStyle": "PackageReference",

@@ -8,4 +8,6 @@ public class TierListTemplate : BaseEntityModel<Guid>
     public Guid OwnerId { get; set; }
     public required User Owner { get; set; }
     public bool IsPrivate { get; set; } = false;
+    public List<Tier> Tiers { get; } = [];
+    public List<Tag> Tags { get; } = [];
 }

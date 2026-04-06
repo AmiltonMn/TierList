@@ -6,4 +6,5 @@ public class Tag : BaseEntityModel<Guid>
     
     public required string Label { get; set; }
     public required string Color { get; set; }
+    public List<TierListTemplate> Templates { get; } = [];
 }

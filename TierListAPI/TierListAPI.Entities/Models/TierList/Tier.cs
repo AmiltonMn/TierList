@@ -9,4 +9,6 @@ public class Tier : BaseEntityModel<Guid>
     public int Position { get; set; }
     public int Points { get; set; }
     public Guid TierListId { get; set; }
+    public TierListTemplate TierList { get; set; }
+    public List<Item> Items { get; } = [];
 }
