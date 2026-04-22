@@ -27,7 +27,13 @@ public static class ItemClassMap
         builder.Property(i => i.IsVertical)
             .HasColumnName("is_vertical")
             .IsRequired();
+
+        builder.Property(i => i.Order)
+            .HasColumnName("order");
         
+        builder.Property(i => i.Score)
+            .HasColumnName("score");
+
         builder.Property(i => i.TierListId)
             .HasColumnName("tier_list_id")
             .IsRequired();

@@ -1,4 +1,3 @@
-using System.Numerics;
 using AutoMapper;
 using MediatR;
 using TierListAPI.Persistence.Repository;
@@ -17,7 +16,7 @@ public class CreateUserHandler (
     
     public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
     {
-        var existingUser = await userRepository.GetByUsername(request.Name, cancellationToken);
+        var existingUser = await userRepository.GetAllByUsername(request.Name, cancellationToken);
 
         if (existingUser is not null)
             throw new Exception("Já existe um usuário com esse nome. Escolha outro nome.");
