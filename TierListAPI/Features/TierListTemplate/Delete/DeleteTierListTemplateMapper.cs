@@ -7,6 +7,6 @@ public class DeleteTierListTemplateMapper : Profile
 {
     public DeleteTierListTemplateMapper() 
     {
-        CreateMapper<Entities.Models.TierListTemplate, DeleteTierListTemplateResponse>();
+        CreateMap<Entities.Models.TierListTemplate, DeleteTierListTemplateResponse>();
     }
 }

@@ -1,10 +1,12 @@
-using System.ComponentModel.DataAnnotations;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 using TierListAPI.Entities.Models;
 
-namespace TierListAPI.Features.TierListTemplate.Create;
+namespace TierListAPI.Features.TierListTemplate.Update;
 
-public sealed record GetTierListTemplateRequest(
+public sealed record UpdateTierListTemplateRequest(
+    [Required]
+    Guid TemplateId,
     [Required]
     [MaxLength(100), MinLength(5)]
     string Name,
@@ -14,4 +16,4 @@ public sealed record GetTierListTemplateRequest(
     Guid UserId,
     bool IsPrivate,
     List<Tag> Tags
-) : IRequest<GetTierListTemplateResponse>;
+) : IRequest<UpdateTierListTemplateResponse>;

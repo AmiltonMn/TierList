@@ -7,6 +7,6 @@ public class CreateTirListTemplateMapper : Profile
 {
     public CreateTirListTemplateMapper()
     {
-        CreateMapper<Entities.Models.TierListTemplate, CreateTierListTemplateResponse>();
+        CreateMap<Entities.Models.TierListTemplate, GetTierListTemplateResponse>();
     }
 }

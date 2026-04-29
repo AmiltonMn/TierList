@@ -7,6 +7,6 @@ public sealed record GetUserResponse(
     string? Bio,
     string? ProfileImage,
     string? BannerImage,
-    List<TierListTemplate> CreatedTierLists,
-    List<TierListTemplate> AnsweredTierLists
+    List<Entities.Models.TierListTemplate> CreatedTierLists,
+    List<Entities.Models.TierListTemplate> AnsweredTierLists
 );

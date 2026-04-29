@@ -1,9 +1,9 @@
 using MediatR;
-using TierListAPI.Entities.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace TierListAPI.Features.TierListTemplate.Delete;
 
 public sealed record DeleteTierListTemplateRequest(
     [Required]
     Guid TemplateId
-) : IRequest<CreateTierListTemplateResponse>;
+) : IRequest<DeleteTierListTemplateResponse>;
