@@ -31,28 +31,4 @@ public class JWTHandler (IConfiguration configuration) : IAutheticator
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
-    public JWTResponse ExtractToken(string token)
-    {
-        try {
-            var tokenBytes = Convert.FromBase64String(token);
-            var tokenData = Encoding.UTF8.GetString(tokenBytes);
-            var parts = tokenData.Split('|');
-
-            if (parts.Length != 3)
-                throw new Exception("Token JWT inválido");
-
-            Guid userId = Guid.Parse(parts[0]);
-            var userName = parts[1];
-            var expiryDate = DateTime.Parse(parts[2]);
-
-            if (DateTime.UtcNow > expiryDate)
-                throw new Exception("Seu token expirou! Faça login novamente");
-
-            return new JWTResponse(userId, userName);
-
-        } catch {
-            throw new Exception("Token JWT inválido");
-        }
-    }
 }

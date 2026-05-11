@@ -6,5 +6,4 @@ namespace TierListAPI.Services;
 public interface IAutheticator
 {
     string GenerateUserToken(User user);
-    JWTResponse ExtractToken(string token);
 }
