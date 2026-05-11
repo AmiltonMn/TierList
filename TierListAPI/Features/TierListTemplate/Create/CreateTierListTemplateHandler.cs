@@ -4,17 +4,17 @@ using TierListAPI.Entities.Models;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.TierListTemplate.Create;
-public class GetTierListTemplateHandler(
+public class CrteateTierListTemplateHandler(
     ITierListTemplateRepository tierListTemplateRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper
-) : IRequestHandler<GetTierListTemplateRequest, GetTierListTemplateResponse>
+) : IRequestHandler<CreateTierListTemplateRequest, CreateTierListTemplateResponse>
 {
     private readonly ITierListTemplateRepository tierListTemplateRepository = tierListTemplateRepository;
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IMapper mapper = mapper;
 
-    public async Task<GetTierListTemplateResponse> Handle(GetTierListTemplateRequest request, CancellationToken cancellationToken)
+    public async Task<CreateTierListTemplateResponse> Handle(CreateTierListTemplateRequest request, CancellationToken cancellationToken)
     {
         if(request.Name is null || request.Description is null)
             throw new Exception("Para criar um template, é necessário um nome e uma descrição!");
@@ -26,6 +26,7 @@ public class GetTierListTemplateHandler(
         {
             Name = request.Name,
             Description = request.Description,
+            BannerImage = "PlaceholderTierListBannerImage.png",
             OwnerId = request.UserId,
             IsPrivate = request.IsPrivate,
         };
@@ -93,10 +94,9 @@ public class GetTierListTemplateHandler(
             TierList = tierListTemplate
         });
 
-
         tierListTemplateRepository.Add(tierListTemplate);
         await unitOfWork.Save(cancellationToken);
 
-        return mapper.Map<GetTierListTemplateResponse>(tierListTemplate);
+        return mapper.Map<CreateTierListTemplateResponse>(tierListTemplate);
     }
 }

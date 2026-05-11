@@ -14,6 +14,7 @@ public class GetByUserNameHandler (
     public async Task<GetByUserNameResponse> Handle(GetByUserNameRequest request, CancellationToken cancellationToken)
     {
         var users = new List<Entities.Models.User>();
+        
         if (request.Name is null)
         {
             users = await userRepository.GetAll(cancellationToken);

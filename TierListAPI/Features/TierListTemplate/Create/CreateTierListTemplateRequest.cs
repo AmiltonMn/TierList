@@ -4,7 +4,7 @@ using TierListAPI.Entities.Models;
 
 namespace TierListAPI.Features.TierListTemplate.Create;
 
-public sealed record GetTierListTemplateRequest(
+public sealed record CreateTierListTemplateRequest(
     [Required]
     [MaxLength(100), MinLength(5)]
     string Name,
@@ -14,4 +14,4 @@ public sealed record GetTierListTemplateRequest(
     Guid UserId,
     bool IsPrivate,
     List<Tag> Tags
-) : IRequest<GetTierListTemplateResponse>;
+) : IRequest<CreateTierListTemplateResponse>;

@@ -12,10 +12,10 @@ public class ItemRepository(TierListDBContext dBContext)
             .Where(i => i.TierListId == tierListTemplateId)
             .ToList();
 
-    public List<Item> GetItemsByName(string name)
+    public List<Item> GetItemsByName(string name, Guid tierListTemplateId)
         => context
             .Items
-            .Where(i => i.Name == name)
+            .Where(i => i.Name == name && i.TierListId == tierListTemplateId)
             .ToList();
 
     public List<Item> GetNotAnsweredItens(Guid tierListTemplateId, Guid userId)

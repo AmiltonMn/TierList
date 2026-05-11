@@ -13,7 +13,7 @@ public class GetUserhandler (
     
     public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
     {
-        var user = userRepository.GetById(request.userId, cancellationToken) 
+        var user = userRepository.GetById(request.UserId, cancellationToken) 
             ?? throw new Exception("Usuário não encontrado.");
 
         return mapper.Map<GetUserResponse>(user);

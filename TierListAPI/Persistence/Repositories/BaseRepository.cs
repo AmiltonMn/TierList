@@ -25,6 +25,7 @@ public class BaseRepository<T>(TierListDBContext dBContext) : IRepository<T>
     public Task<bool> Exists(Guid id, CancellationToken cancellationToken)
         => dbSet
             .AnyAsync(e => e.Id == id, cancellationToken);
+
     public Task<List<T>> GetAll(CancellationToken cancellationToken)
         => context
             .Set<T>()
