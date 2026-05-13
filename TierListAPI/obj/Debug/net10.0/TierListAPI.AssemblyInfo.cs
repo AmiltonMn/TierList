@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TierListAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+948c159a0b70406f656fc759b3baa873bc33d562")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62f3643f0267cb76f74180a79dc262cb32633c9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TierListAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TierListAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
