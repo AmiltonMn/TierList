@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using TierListAPI.DTOs;
 using TierListAPI.Entities.Models;
 
@@ -6,46 +9,63 @@ namespace TierListAPI.Services;
 
 public class JWTHandler : IAutheticator
 {
-    private readonly IConfiguration _configuration;
-
-    public JWTHandler(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
+    private const string SecretKey = "%IUojN$JKjunJKI47y$HThrfHGF56t5fgh$F";
 
     public string GenerateUserToken(User user)
     {
-        var tokenData = $"{user.Id}|{user.Name}|{DateTime.UtcNow.AddDays(1):yyyy-MM-dd HH:mm:ss}";
-        var tokenBytes = Encoding.UTF8.GetBytes(tokenData);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(SecretKey);
 
-        return Convert.ToBase64String(tokenBytes);
+        var claims = new[]
+        {
+            new Claim("id", user.Id.ToString()),
+            new Claim("name", user.Name)
+        };
+
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddDays(1),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature
+            )
+        };
+
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
     }
 
     public JWTUser ExtractToken(string token)
     {
-        try {
-            var tokenBytes = Convert.FromBase64String(token);
-            var tokenData = Encoding.UTF8.GetString(tokenBytes);
-            var parts = tokenData.Split('|');
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(SecretKey);
 
-            if (parts.Length != 3)
-                throw new Exception("Token JWT inválido");
+        try
+        {
+            var parameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ClockSkew = TimeSpan.Zero
+            };
 
-            var userId = parts[0];
-            var userName = parts[1];
-            var expiryDate = DateTime.Parse(parts[2]);
+            var principal = tokenHandler.ValidateToken(token, parameters, out _);
 
-            if (DateTime.UtcNow > expiryDate)
-                throw new Exception("Seu token expirou! Faça login novamente");
+            var userId = principal.FindFirst("id")?.Value;
+            var userName = principal.FindFirst("name")?.Value;
 
-            return new JWTUser
-            (
-                Id: Guid.Parse(userId),
-                Name: userName
+            return new JWTUser(
+                Id: Guid.Parse(userId!),
+                Name: userName!
             );
-
-        } catch {
-            throw new Exception("Token JWT inválido");
+        }
+        catch
+        {
+            throw new Exception("Token inválido ou expirado");
         }
     }
 }

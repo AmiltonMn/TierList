@@ -7,6 +7,6 @@ public class CreateUserMapper : Profile
 {
     public CreateUserMapper()
     {
-        CreateMap<Entities.Models.User, CreateUserResponse>();
+        CreateMap<CreateUserRequest, CreateUserResponse>();
     }
 }
