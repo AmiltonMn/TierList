@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using TierListAPI.DTOs;
 using TierListAPI.Entities.Models;
 
 namespace TierListAPI.Services;
@@ -20,7 +21,7 @@ public class JWTHandler : IAutheticator
         return Convert.ToBase64String(tokenBytes);
     }
 
-    public User ExtractToken(string token)
+    public JWTUser ExtractToken(string token)
     {
         try {
             var tokenBytes = Convert.FromBase64String(token);
@@ -37,11 +38,11 @@ public class JWTHandler : IAutheticator
             if (DateTime.UtcNow > expiryDate)
                 throw new Exception("Seu token expirou! Faça login novamente");
 
-            return new User 
-            {
-                Id = userId,
-                Name = userName,
-            }
+            return new JWTUser
+            (
+                Id: Guid.Parse(userId),
+                Name: userName
+            );
 
         } catch {
             throw new Exception("Token JWT inválido");
