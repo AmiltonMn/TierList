@@ -15,10 +15,16 @@ public class DeleteUserHandler (
     
     public async Task<DeleteUserResponse> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
     {
-        var user = userRepository.GetById(request.Id, cancellationToken) 
+        Entities.Models.User user = userRepository.GetById(request.Id, cancellationToken) 
             ?? throw new Exception("Usuário não encontrado.");
 
-        userRepository.Delete(user);
+        var DeletedUsers = await userRepository.GetAllByUsername("DeletedUser", cancellationToken);
+
+        user.DeletedAt = DateTimeOffset.Now;
+        user.IsDeleted = true;
+        user.Name = $"DeletedUser{DeletedUsers.Count}";
+
+        userRepository.Update(user);
 
         await unitOfWork.Save(cancellationToken);
         

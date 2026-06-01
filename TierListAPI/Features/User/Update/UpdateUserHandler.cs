@@ -16,12 +16,12 @@ public class UpdateUserhandler (
     
     public async Task<UpdateUserResponse> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
     {
-        UserModel user = userRepository.GetById(request.userId, cancellationToken) 
+        UserModel user = userRepository.GetById(request.UserId, cancellationToken) 
             ?? throw new Exception("Usuário não encontrado.");
 
         var existingUser = await userRepository.GetAllByUsername(request.Name, cancellationToken);
 
-        if (existingUser is not null && existingUser.Any(u => u.Id != request.userId))
+        if (existingUser is not null && existingUser.Any(u => u.Id != request.UserId))
             throw new Exception("Já existe um usuário com esse nome. Escolha outro nome.");
 
         user.Name = request.Name;
