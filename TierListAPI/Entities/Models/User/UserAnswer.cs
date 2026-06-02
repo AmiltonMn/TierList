@@ -12,5 +12,6 @@ public class UserAnswer : BaseEntityModel
     public required Item Item { get; set; }
     public required Guid TierId { get; set; }
     public required Tier Tier { get; set; }
+    public required int Score { get; set; }
     public string? Comment { get; set; }
 }

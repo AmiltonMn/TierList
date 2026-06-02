@@ -1,16 +1,19 @@
 using AutoMapper;
 using MediatR;
-using TierListAPI.Entities.Models;
+using TierModel = TierListAPI.Entities.Models.Tier;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.TierListTemplate.Create;
 public class CrteateTierListTemplateHandler(
     ITierListTemplateRepository tierListTemplateRepository,
+    ITierRepository tierRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper
 ) : IRequestHandler<CreateTierListTemplateRequest, CreateTierListTemplateResponse>
 {
     private readonly ITierListTemplateRepository tierListTemplateRepository = tierListTemplateRepository;
+    private readonly ITierRepository tierRepository = tierRepository;
+
     private readonly IUnitOfWork unitOfWork = unitOfWork;
     private readonly IMapper mapper = mapper;
 
@@ -24,6 +27,7 @@ public class CrteateTierListTemplateHandler(
 
         var tierListTemplate = new Entities.Models.TierListTemplate
         {
+            Id = Guid.NewGuid(),
             Name = request.Name,
             Description = request.Description,
             BannerImage = "PlaceholderTierListBannerImage.png",
@@ -31,68 +35,78 @@ public class CrteateTierListTemplateHandler(
             IsPrivate = request.IsPrivate,
         };
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "S",
             Color = "#FF7F7F",
             Position = 1,
             Points = 5,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "A",
             Color = "#ffbf7f",
             Position = 2,
             Points = 4,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "B",
             Color = "#ffdf7f",
             Position = 3,
             Points = 3,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "C",
             Color = "#ffff7f",
             Position = 4,
             Points = 2,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "D",
             Color = "#bfff7f",
             Position = 5,
             Points = 1,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "E",
             Color = "#7fff7f",
             Position = 6,
             Points = 0,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
 
-        tierListTemplate.Tiers.Add(new Tier
+        tierListTemplate.Tiers.Add(new TierModel
         {
+            Id = Guid.NewGuid(),
             Label = "F",
             Color = "#7fbfff",
             Position = 7,
             Points = -1,
-            TierList = tierListTemplate
+            TierListId = tierListTemplate.Id
         });
+
+        foreach (var tier in tierListTemplate.Tiers)
+            tierRepository.Add(tier);
 
         tierListTemplateRepository.Add(tierListTemplate);
         await unitOfWork.Save(cancellationToken);

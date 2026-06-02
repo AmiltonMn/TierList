@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using TierListAPI.Persistence.Repository;
+using UserModel = TierListAPI.Entities.Models.User;
 using BC = BCrypt.Net.BCrypt;
 
 namespace TierListAPI.Features.User.Create;
@@ -24,7 +25,7 @@ public class CreateUserHandler (
         if (request.Password.Length < 8 && !request.Password.Any(char.IsDigit))
             throw new Exception("A senha deve conter pelo menos 8 caracteres e incluir um número.");
         
-        var user = new Entities.Models.User
+        var user = new UserModel
         {
             Name = request.Name,
             Password = BC.HashPassword(request.Password),

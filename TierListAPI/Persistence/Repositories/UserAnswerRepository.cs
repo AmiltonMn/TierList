@@ -7,20 +7,22 @@ public class UserAnswerRepository(TierListDBContext dBContext)
     : BaseRepository<UserAnswer>(dBContext), IUserAnswerRepository
 {
     public List<UserAnswer> GetAllByTemplateId(Guid templateId)
-        => context
+        => [.. context
             .UserAnswers
-            .Where(ua => ua.Id == templateId)
-            .ToList();
+            .Where(ua => ua.Id == templateId)];
 
     public List<UserAnswer> GetAllByUserId(Guid userId)
-        => context
+        => [.. context
             .UserAnswers
-            .Where(ua => ua.UserId == userId)
-            .ToList();
+            .Where(ua => ua.UserId == userId)];
 
     public List<UserAnswer> GetAllByUserIdAndTemplateId(Guid userId, Guid templateId)
-        => context
+        => [.. context
             .UserAnswers
-            .Where(ua => ua.UserId == userId && ua.Id == templateId)
-            .ToList();
+            .Where(ua => ua.UserId == userId && ua.Id == templateId)];
+
+    public List<UserAnswer> GetAllByTierId(Guid tierId)
+        => [.. context
+            .UserAnswers
+            .Where(ua => ua.TierId == tierId)];
 }
