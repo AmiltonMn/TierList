@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using TierListAPI.Persistence.Repository;
+using TierModel = TierListAPI.Entities.Models.Tier;
 
 namespace TierListAPI.Features.Tier.Create;
 
@@ -34,12 +35,12 @@ public class CreateTierHandler(
 
         var position = tierListTemplate.Result.Tiers.LastOrDefault()?.Position + 1 ?? 0;
 
-        var tier = new Entities.Models.Tier
+        var tier = new TierModel
         {
             Label = request.Label,
             Color = request.Color,
             Position = position,
-            Points = (tierListTemplate.Result.Tiers.Count - 1) - request.Position,
+            Points = (tierListTemplate.Result.Tiers.Count) - request.Position,
             TierListId = request.TierListId
         };
 

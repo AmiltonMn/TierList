@@ -25,4 +25,14 @@ public class UserAnswerRepository(TierListDBContext dBContext)
         => [.. context
             .UserAnswers
             .Where(ua => ua.TierId == tierId)];
+
+    public List<UserAnswer> GetAllByUserIdAndTierIdAndTemplateId(Guid userId, Guid templateId, Guid tierId)
+        => [.. context
+            .UserAnswers
+            .Where(ua => ua.UserId == userId && ua.TierId == tierId && ua.TierListId == templateId)];
+
+    public List<UserAnswer> GetAllByItemId(Guid itemId)
+        => [.. context
+            .UserAnswers
+            .Where(ua => ua.ItemId == itemId)];
 }

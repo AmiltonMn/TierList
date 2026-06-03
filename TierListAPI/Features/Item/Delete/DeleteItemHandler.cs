@@ -1,6 +1,5 @@
-﻿namespace TierListAPI.Features.Item.Delete
+﻿namespace TierListAPI.Features.Item.Delete;
+
+public class DeleteItemHandler
 {
-    public class DeleteItemHandler
-    {
-    }
 }
