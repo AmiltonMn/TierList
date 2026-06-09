@@ -1,6 +1,6 @@
-﻿namespace TierListAPI.Features.Tag.Delete
-{
-    public class DeleteTagResponse
-    {
-    }
-}
+﻿namespace TierListAPI.Features.Tag.Delete;
+
+public sealed record DeleteTagResponse
+(
+  Guid TagId  
+);

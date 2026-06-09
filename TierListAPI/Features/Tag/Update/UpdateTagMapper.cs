@@ -1,5 +1,11 @@
-﻿namespace TierListAPI.Features.Tag.Update;
+﻿using AutoMapper;
 
-public class UpdateTagMapper
+namespace TierListAPI.Features.Tag.Update;
+
+public class UpdateTagMapper : Profile
 {
+    public UpdateTagMapper() 
+    {
+        CreateMap<UpdateTagRequest, UpdateTagResponse>();
+    }
 }

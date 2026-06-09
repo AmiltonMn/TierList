@@ -9,9 +9,4 @@ public class User : BaseEntityModel
     public string? BannerImage { get; set; }
     public List<TierListTemplate> TierListTemplates { get; set; } = [];
     public List<UserAnswer> Answers { get; set; } = [];
-
-    public static implicit operator User(Task<User?> v)
-    {
-        throw new NotImplementedException();
-    }
 }

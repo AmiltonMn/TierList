@@ -1,6 +1,6 @@
-﻿namespace TierListAPI.Features.Tag.Create
-{
-    public class CreateTagResponse
-    {
-    }
-}
+﻿namespace TierListAPI.Features.Tag.Create;
+
+public sealed record CreateTagResponse
+(
+    Guid TagId  
+);

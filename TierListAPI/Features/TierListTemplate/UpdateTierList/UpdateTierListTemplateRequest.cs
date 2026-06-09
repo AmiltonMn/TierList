@@ -1,19 +1,13 @@
 using MediatR;
-using System.ComponentModel.DataAnnotations;
-using TierListAPI.Entities.Models;
+using TagModel = TierListAPI.Entities.Models.Tag;
 
 namespace TierListAPI.Features.TierListTemplate.Update;
 
 public sealed record UpdateTierListTemplateRequest(
-    [Required]
     Guid TemplateId,
-    [Required]
-    [MaxLength(100), MinLength(5)]
     string Name,
-    [Required]
-    [MaxLength(500), MinLength(10)]
     string Description,
     Guid UserId,
     bool IsPrivate,
-    List<Tag> Tags
+    List<TagModel> Tags
 ) : IRequest<UpdateTierListTemplateResponse>;

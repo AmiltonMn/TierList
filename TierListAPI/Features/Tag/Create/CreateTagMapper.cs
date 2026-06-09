@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Tag.Create
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Tag.Create;
+
+public class CreateTagMapper : Profile
 {
-    public class CreateTagMapper
+    public CreateTagMapper() 
     {
+        CreateMap<CreateTagRequest, CreateTagResponse>();
     }
 }

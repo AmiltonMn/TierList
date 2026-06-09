@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Tag.Delete
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Tag.Delete;
+
+public class DeleteTagMapper : Profile
 {
-    public class DeleteTagMapper
+    public DeleteTagMapper() 
     {
+        CreateMap<DeleteTagRequest, DeleteTagResponse>();
     }
 }

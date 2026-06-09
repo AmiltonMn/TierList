@@ -27,7 +27,6 @@ public class CrteateTierListTemplateHandler(
 
         var tierListTemplate = new Entities.Models.TierListTemplate
         {
-            Id = Guid.NewGuid(),
             Name = request.Name,
             Description = request.Description,
             BannerImage = "PlaceholderTierListBannerImage.png",
@@ -37,7 +36,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "S",
             Color = "#FF7F7F",
             Position = 1,
@@ -47,7 +45,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "A",
             Color = "#ffbf7f",
             Position = 2,
@@ -57,7 +54,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "B",
             Color = "#ffdf7f",
             Position = 3,
@@ -67,7 +63,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "C",
             Color = "#ffff7f",
             Position = 4,
@@ -77,7 +72,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "D",
             Color = "#bfff7f",
             Position = 5,
@@ -87,7 +81,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "E",
             Color = "#7fff7f",
             Position = 6,
@@ -97,7 +90,6 @@ public class CrteateTierListTemplateHandler(
 
         tierListTemplate.Tiers.Add(new TierModel
         {
-            Id = Guid.NewGuid(),
             Label = "F",
             Color = "#7fbfff",
             Position = 7,

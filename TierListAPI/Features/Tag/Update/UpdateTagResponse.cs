@@ -1,6 +1,6 @@
-﻿namespace TierListAPI.Features.Tag.Update
-{
-    public class UpdateTagResponse
-    {
-    }
-}
+﻿namespace TierListAPI.Features.Tag.Update;
+
+public sealed record UpdateTagResponse
+(
+    Guid TagId
+);

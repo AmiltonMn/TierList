@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Tag.GetAll
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Tag.GetAll;
+
+public class GetAllTagMapper : Profile
 {
-    public class GetAllTagMapper
+    public GetAllTagMapper() 
     {
+        CreateMap<GetAllTagRequest, GetAllTagResponse>();
     }
 }
