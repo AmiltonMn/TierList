@@ -1,6 +1,5 @@
-﻿namespace TierListAPI.Features.Item.Create
+﻿namespace TierListAPI.Features.Item.Create;
+
+public class CreateItemHandler
 {
-    public class CreateItemHandler
-    {
-    }
 }

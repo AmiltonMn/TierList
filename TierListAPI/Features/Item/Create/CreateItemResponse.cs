@@ -1,6 +1,6 @@
-﻿namespace TierListAPI.Features.Item.Create
-{
-    public class CreateItemResponse
-    {
-    }
-}
+﻿namespace TierListAPI.Features.Item.Create;
+
+public sealed record CreateItemResponse
+(
+    Guid ItemId
+);
