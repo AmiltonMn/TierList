@@ -8,5 +8,5 @@ public class User : BaseEntityModel
     public string? ProfileImage { get; set; }
     public string? BannerImage { get; set; }
     public List<TierListTemplate> TierListTemplates { get; set; } = [];
-    public List<UserAnswer> Answers { get; set; } = [];
+    public List<TierListAPI.Entities.Models.TierList.TierListSubmission> Submissions { get; set; } = [];
 }

@@ -22,6 +22,6 @@ public class ItemRepository(TierListDBContext dBContext)
         => context
             .Items
             .Where(i => i.TierListId == tierListTemplateId)
-            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.UserId == userId))
+            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.Submission!.UserId == userId))
             .ToList();
 }

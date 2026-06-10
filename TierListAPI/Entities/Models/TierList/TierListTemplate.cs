@@ -12,5 +12,5 @@ public class TierListTemplate : BaseEntityModel
     public List<Tier> Tiers { get; set; } = [];
     public List<Tag> Tags { get; set; } = [];
     public List<Item> Items { get; set; } = [];
-    public List<UserAnswer> UserAnswers = [];
+    public List<TierListAPI.Entities.Models.TierList.TierListSubmission> Submissions { get; set; } = [];
 }

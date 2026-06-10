@@ -15,7 +15,7 @@ public class DeleteUserHandler (
     
     public async Task<DeleteUserResponse> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
     {
-        Entities.Models.User user = userRepository.GetById(request.Id, cancellationToken) 
+        Entities.Models.User user = await userRepository.GetById(request.Id, cancellationToken) 
             ?? throw new Exception("Usuário não encontrado.");
 
         var DeletedUsers = await userRepository.GetAllByUsername("DeletedUser", cancellationToken);

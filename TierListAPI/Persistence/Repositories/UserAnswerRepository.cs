@@ -9,17 +9,17 @@ public class UserAnswerRepository(TierListDBContext dBContext)
     public List<UserAnswer> GetAllByTemplateId(Guid templateId)
         => [.. context
             .UserAnswers
-            .Where(ua => ua.Id == templateId)];
+            .Where(ua => ua.Submission!.TierListTemplateId == templateId)];
 
     public List<UserAnswer> GetAllByUserId(Guid userId)
         => [.. context
             .UserAnswers
-            .Where(ua => ua.UserId == userId)];
+            .Where(ua => ua.Submission!.UserId == userId)];
 
     public List<UserAnswer> GetAllByUserIdAndTemplateId(Guid userId, Guid templateId)
         => [.. context
             .UserAnswers
-            .Where(ua => ua.UserId == userId && ua.Id == templateId)];
+            .Where(ua => ua.Submission!.UserId == userId && ua.Submission!.TierListTemplateId == templateId)];
 
     public List<UserAnswer> GetAllByTierId(Guid tierId)
         => [.. context
@@ -29,7 +29,7 @@ public class UserAnswerRepository(TierListDBContext dBContext)
     public List<UserAnswer> GetAllByUserIdAndTierIdAndTemplateId(Guid userId, Guid templateId, Guid tierId)
         => [.. context
             .UserAnswers
-            .Where(ua => ua.UserId == userId && ua.TierId == tierId && ua.TierListId == templateId)];
+            .Where(ua => ua.Submission!.UserId == userId && ua.TierId == tierId && ua.Submission!.TierListTemplateId == templateId)];
 
     public List<UserAnswer> GetAllByItemId(Guid itemId)
         => [.. context

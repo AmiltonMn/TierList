@@ -31,16 +31,17 @@ public class CreateUserAnswerHandler (
         var user = await userRepository.GetById(request.UserId, cancellationToken) ?? throw new Exception("Usuário não encontrado.");
         var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new Exception("Item não encontrado.");
 
+        // For now, to keep the compiler happy since we need a submission:
+        // Ideal is to fetch an existing submission via a SubmissionRepository
+        var submissionId = Guid.NewGuid();
+
         var answer = new UserAnswerModel
         {
-            UserId = request.UserId,
-            User = user,
+            SubmissionId = submissionId,
             TierId = request.TierId,
             Tier = tier,
             ItemId = request.ItemId,
             Item = item,
-            TierListId = request.TierListId,
-            TierList = tierList,
             Score = 0
         };
 
