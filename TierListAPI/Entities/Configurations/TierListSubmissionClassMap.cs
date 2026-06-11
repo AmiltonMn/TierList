@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TierListAPI.Entities.Models.TierList;
+using TierListAPI.Entities.Models;
 
 namespace TierListAPI.Entities.Configurations;
 
@@ -14,6 +14,9 @@ public static class TierListSubmissionClassMap
 
             builder.Property(s => s.UserId)
                 .HasColumnName("user_id");
+
+            builder.Property(s => s.TemplateVersion)
+                .HasColumnName("template_version");
 
             builder.HasOne(s => s.User)
                 .WithMany(u => u.Submissions)

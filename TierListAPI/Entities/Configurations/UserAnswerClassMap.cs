@@ -24,9 +24,12 @@ public static class UserAnswerClassMap
                 .HasColumnName("comment")
                 .HasMaxLength(500);
 
+            builder.Property(ua => ua.Score)
+                .HasColumnName("score");
+
             builder.Property(ua => ua.TierId)
                 .HasColumnName("tier_id")
-                .IsRequired(false);  
+                .IsRequired(false);
 
             builder.HasOne(ua => ua.Tier)
                 .WithMany(t => t.UserAnswers)

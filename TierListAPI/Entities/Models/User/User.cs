@@ -1,12 +1,11 @@
 namespace TierListAPI.Entities.Models;
 public class User : BaseEntityModel
 {
-    public User() { }
     public required string Name { get; set; }
     public required string Password { get; set; }
     public string? Bio { get; set; }
     public string? ProfileImage { get; set; }
     public string? BannerImage { get; set; }
     public List<TierListTemplate> TierListTemplates { get; set; } = [];
-    public List<TierListAPI.Entities.Models.TierList.TierListSubmission> Submissions { get; set; } = [];
+    public List<TierListSubmission> Submissions { get; set; } = [];
 }

@@ -18,10 +18,11 @@ public static class ItemClassMap
         builder.Property(i => i.Name)
             .HasColumnName("name")
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(150);
 
         builder.Property(i => i.ItemImage)
             .HasColumnName("item_image")
+            .HasColumnType("VARCHAR(255)")
             .IsRequired();
 
         builder.Property(i => i.IsVertical)
@@ -34,15 +35,8 @@ public static class ItemClassMap
         builder.Property(i => i.Score)
             .HasColumnName("score");
 
-        builder.Property(i => i.TierListId)
-            .HasColumnName("tier_list_id")
-            .IsRequired();
-
-        builder.HasOne(i => i.TierList)
-            .WithMany(tl => tl.Items)
-            .HasForeignKey(i => i.TierListId)
-            .OnDelete(DeleteBehavior.Cascade)
-            .IsRequired();
+        builder.Property(i => i.TierListTemplateId)
+            .HasColumnName("template_id");
 
         builder.Property(i => i.TierId)
             .HasColumnName("tier_id")
