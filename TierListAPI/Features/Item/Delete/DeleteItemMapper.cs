@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Item.Delete
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Item.Delete;
+
+public class DeleteItemMapper : Profile
 {
-    public class DeleteItemMapper
+    public DeleteItemMapper() 
     {
+        CreateMap<DeleteItemRequest, DeleteItemResponse>();
     }
 }

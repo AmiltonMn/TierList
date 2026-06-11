@@ -7,5 +7,5 @@ public sealed record CreateItemRequest
     string Name,
     string ItemImage,
     bool IsVertical,
-    Guid TierListId
+    Guid TierListTemplateId
 ) : IRequest<CreateItemResponse>;

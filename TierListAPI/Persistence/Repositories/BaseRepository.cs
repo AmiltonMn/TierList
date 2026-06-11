@@ -34,7 +34,7 @@ public class BaseRepository<T>(TierListDBContext dBContext) : IRepository<T>
     public Task<T?> GetById(Guid id, CancellationToken cancellationToken)
     {
         return context
-                .Set<T>()
-                .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+            .Set<T>()
+            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 }

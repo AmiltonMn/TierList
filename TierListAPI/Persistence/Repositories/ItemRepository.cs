@@ -7,21 +7,17 @@ public class ItemRepository(TierListDBContext dBContext)
     : BaseRepository<Item>(dBContext), IItemRepository
 {
     public List<Item> GetByTierListTemplateId(Guid tierListTemplateId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.TierListId == tierListTemplateId)
-            .ToList();
+            .Where(i => i.TierListTemplateId == tierListTemplateId)];
 
     public List<Item> GetItemsByName(string name, Guid tierListTemplateId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.Name == name && i.TierListId == tierListTemplateId)
-            .ToList();
+            .Where(i => i.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase) && i.TierListTemplateId == tierListTemplateId)];
 
     public List<Item> GetNotAnsweredItens(Guid tierListTemplateId, Guid userId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.TierListId == tierListTemplateId)
-            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.Submission!.UserId == userId))
-            .ToList();
+            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.Submission!.UserId == userId))];
 }

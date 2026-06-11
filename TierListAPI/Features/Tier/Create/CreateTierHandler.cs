@@ -36,7 +36,7 @@ public class CreateTierHandler(
             Color = request.Color,
             Position = position,
             Points = (tierListTemplate.Tiers.Count) - request.Position,
-            TierListId = request.TierListId
+            TierListTemplateId = request.TierListId
         };
 
         tierRepository.Add(tier);

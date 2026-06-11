@@ -1,6 +1,6 @@
-﻿namespace TierListAPI.Features.Item.Delete
-{
-    public class DeleteItemResponse
-    {
-    }
-}
+﻿namespace TierListAPI.Features.Item.Delete;
+
+public sealed record DeleteItemResponse
+(
+    Guid ItemId
+);

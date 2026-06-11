@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Item.Update
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Item.Update;
+
+public class UpdateItemMapper : Profile
 {
-    public class UpdateItemMapper
+    public UpdateItemMapper() 
     {
+        CreateMap<UpdateItemRequest, UpdateItemResponse>();
     }
 }

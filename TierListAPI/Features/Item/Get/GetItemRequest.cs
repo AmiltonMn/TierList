@@ -1,6 +1,8 @@
-﻿namespace TierListAPI.Features.Item.Get
-{
-    public class GetItemRequest
-    {
-    }
-}
+﻿using MediatR;
+
+namespace TierListAPI.Features.Item.Get;
+
+public sealed record GetItemRequest
+(
+    Guid ItemId
+) : IRequest<GetItemResponse>;

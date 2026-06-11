@@ -39,8 +39,7 @@ public static class ItemClassMap
             .HasColumnName("template_id");
 
         builder.Property(i => i.TierId)
-            .HasColumnName("tier_id")
-            .IsRequired();
+            .HasColumnName("tier_id");
 
         builder.HasOne(i => i.Tier)
             .WithMany(t => t.Items)

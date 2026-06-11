@@ -7,8 +7,7 @@ public class TierRepository(TierListDBContext dBContext)
     : BaseRepository<Tier>(dBContext), ITierRepository
 {
     public List<Tier> GetTiersByTierListTemplateId(Guid tierListTemplateId)
-        => context
+        => [.. context
             .Tiers
-            .Where(t => t.TierListId == tierListTemplateId)
-            .ToList();
+            .Where(t => t.TierListTemplateId == tierListTemplateId)];
 }
