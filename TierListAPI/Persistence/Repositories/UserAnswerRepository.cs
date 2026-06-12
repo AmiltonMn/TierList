@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TierListAPI.Entities.Models;
 using TierListAPI.Persistence.Repository;
 
@@ -26,7 +27,7 @@ public class UserAnswerRepository(TierListDBContext dBContext)
             .UserAnswers
             .Where(ua => ua.TierId == tierId)];
 
-    public List<UserAnswer> GetAllByUserIdAndTierIdAndTemplateId(Guid userId, Guid templateId, Guid tierId)
+    public List<UserAnswer> GetAllByUserIdAndTierIdAndTemplateId(Guid userId, Guid templateId, Guid? tierId)
         => [.. context
             .UserAnswers
             .Where(ua => ua.Submission!.UserId == userId && ua.TierId == tierId && ua.Submission!.TierListTemplateId == templateId)];
@@ -35,4 +36,13 @@ public class UserAnswerRepository(TierListDBContext dBContext)
         => [.. context
             .UserAnswers
             .Where(ua => ua.ItemId == itemId)];
+
+    public async Task<int> DeleteAllBySubmissionId(Guid submissionId)
+    {
+        return await 
+            context
+            .UserAnswers
+            .Where(ua => ua.SubmissionId == submissionId)
+            .ExecuteDeleteAsync();
+    }
 }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.UserAnswer.Delete;
@@ -15,7 +17,7 @@ public class DeleteUserAnswerHandler (
 
     public async Task<DeleteUserAnswerResponse> Handle(DeleteUserAnswerRequest request, CancellationToken cancellationToken)
     {
-        var userAnswer = await userAnswerRepository.GetById(request.AnswerId, cancellationToken) ?? throw new Exception("Resposta não encontrada.");
+        var userAnswer = await userAnswerRepository.GetById(request.AnswerId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.UserAnswer);
 
         userAnswerRepository.Delete(userAnswer);
         await unitOfWork.Save(cancellationToken);

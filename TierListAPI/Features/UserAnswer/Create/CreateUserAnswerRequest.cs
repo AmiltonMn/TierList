@@ -8,6 +8,7 @@ public sealed record CreateUserAnswerRequest
     Guid TierListId,
     Guid ItemId,
     Guid TierId,
+    Guid SubmissionId,
     string Comment,
     int Order
 ) : IRequest<CreateUserAnswerResponse>;

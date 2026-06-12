@@ -1,6 +1,11 @@
-﻿namespace TierListAPI.Features.Item.GetByTier
+﻿using AutoMapper;
+
+namespace TierListAPI.Features.Item.GetByTier;
+
+public class GetItemByTierMapper : Profile
 {
-    public class GetItemByTierMapper
+    public GetItemByTierMapper() 
     {
+        CreateMap<GetItemByTierRequest, GetItemByTierResponse>();
     }
 }

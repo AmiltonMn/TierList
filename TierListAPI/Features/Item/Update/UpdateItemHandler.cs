@@ -14,6 +14,16 @@ public class UpdateItemHandler
 
     public async Task<UpdateItemResponse> Handle(UpdateItemRequest request, CancellationToken cancellationToken) 
     {
-        
+        ItemModel item = itemRepository.GetById(request.ItemId, cancellationToken).Result ?? throw new Exception("Item não encontrado.");
+
+        item.Name = request.Name;
+        item.ItemImage = request.ItemImage;
+        item.IsVertical = request.IsVertical;
+
+        itemRepository.Update(item);
+
+        await unitOfWork.Save(cancellationToken);
+
+        return mapper.Map<UpdateItemResponse>(item);
     }
 }

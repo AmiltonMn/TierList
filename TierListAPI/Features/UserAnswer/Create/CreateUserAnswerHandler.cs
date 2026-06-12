@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repositories;
 using TierListAPI.Persistence.Repository;
+using TierListAPI.Persistence.Repository.Submission;
 using UserAnswerModel = TierListAPI.Entities.Models.UserAnswer;
 
 namespace TierListAPI.Features.UserAnswer.Create;
@@ -11,39 +14,34 @@ public class CreateUserAnswerHandler (
     ITierListTemplateRepository tierListTemplateRepository,
     ITierRepository tierRepository,
     IUserRepository userRepository,
-    ItemRepository itemRepository,
+    IItemRepository itemRepository,
+    ISubmissionRepository submissionRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper
 ) : IRequestHandler<CreateUserAnswerRequest, CreateUserAnswerResponse> {
-    private readonly IUserAnswerRepository userAnswerRepository = userAnswerRepository;
-    private readonly ITierListTemplateRepository tierListTemplateRepository = tierListTemplateRepository;
-    private readonly ITierRepository tierRepository = tierRepository;
-    private readonly IUserRepository userRepository = userRepository;
-    private readonly IItemRepository itemRepository = itemRepository;
-    private readonly IUnitOfWork unitOfWork = unitOfWork;
-    private readonly IMapper mapper = mapper;
-
     public async Task<CreateUserAnswerResponse> Handle(CreateUserAnswerRequest request, CancellationToken cancellationToken) 
     {
-        var tierList = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new Exception("O tier list não foi encontrado.");
+        var tierList = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
-        var tier = await tierRepository.GetById(request.TierId, cancellationToken) ?? throw new Exception("O tier não foi encontrado.");
-        var user = await userRepository.GetById(request.UserId, cancellationToken) ?? throw new Exception("Usuário não encontrado.");
-        var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new Exception("Item não encontrado.");
-
-        // For now, to keep the compiler happy since we need a submission:
-        // Ideal is to fetch an existing submission via a SubmissionRepository
-        var submissionId = Guid.NewGuid();
+        var tier = await tierRepository.GetById(request.TierId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Tier);
+        var user = await userRepository.GetById(request.UserId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.User);
+        var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
+        var submission = await submissionRepository.GetById(request.SubmissionId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Submission);
 
         var answer = new UserAnswerModel
         {
-            SubmissionId = submissionId,
+            SubmissionId = request.SubmissionId,
             TierId = request.TierId,
             Tier = tier,
             ItemId = request.ItemId,
             Item = item,
             Score = 0
         };
+
+        submission.AnsweredAt = DateTimeOffset.UtcNow;
+        submission.TemplateVersion = tierList.Version;
+
+        submissionRepository.Update(submission);
 
         var userAnswersOnTier = userAnswerRepository.GetAllByUserIdAndTierIdAndTemplateId(request.UserId, request.TierListId, request.TierId).Count;
 

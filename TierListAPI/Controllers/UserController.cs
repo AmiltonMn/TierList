@@ -1,11 +1,11 @@
 namespace API.Controller;
 
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using TierListAPI.Entities.Models;
 
 [ApiController]
-[Route("watch/{id}")]
-public class UserController(string id)
+[Route("user")]
+public class UserController(IMediator mediator)
 {
     
 }

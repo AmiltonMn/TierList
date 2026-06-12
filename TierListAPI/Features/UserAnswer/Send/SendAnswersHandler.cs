@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repositories;
 using TierListAPI.Persistence.Repository;
 
@@ -26,7 +28,7 @@ public class SendAnswersHandler
 
         foreach (var answer in usersAnswers)
         {
-            var item = await itemRepository.GetById(answer.ItemId, cancellationToken) ?? throw new Exception("O item não foi encontrado.");
+            var item = await itemRepository.GetById(answer.ItemId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
             item.Score = answer.AverageScore;
 

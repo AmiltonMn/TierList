@@ -5,5 +5,7 @@ namespace TierListAPI.Features.UserAnswer.Update;
 
 public sealed record UpdateAnswerRequest
 (
-    UserAnswerModel Answer
+    UserAnswerModel Answer,
+    Guid UserId,
+    Guid TemplateId
 ) : IRequest<UpdateAnswerResponse>;
