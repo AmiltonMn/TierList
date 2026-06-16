@@ -1,9 +1,0 @@
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.csproj.AssemblyReference.cache
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\rpswa.dswa.cache.json
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.GeneratedMSBuildEditorConfig.editorconfig
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.AssemblyInfoInputs.cache
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.AssemblyInfo.cs
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.csproj.CoreCompileInputs.cache
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.MvcApplicationPartsAssemblyInfo.cs
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.MvcApplicationPartsAssemblyInfo.cache
-D:\Projetos\TierList\TierListAPI\obj\Debug\net10.0\TierListAPI.sourcelink.json
