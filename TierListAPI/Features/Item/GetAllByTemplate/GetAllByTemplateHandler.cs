@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.Item.GetAllByTemplate;
@@ -11,7 +12,7 @@ public class GetAllByTemplateHandler (
 {
     public async Task<GetAllByTemplateResponse> Handle(GetAllByTemplateRequest request, CancellationToken cancellationToken)
     {
-        var items = itemRepository.GetByTierListTemplateId(request.TemplateId) ?? throw new Exception("Nenhum item foi encontrado na tierlist.");
+        var items = itemRepository.GetByTierListTemplateId(request.TemplateId) ?? throw new NotFoundException("Nenhum item foi encontrado na tierlist.");
     
         return mapper.Map<GetAllByTemplateResponse>(items);
     }

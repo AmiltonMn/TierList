@@ -2,6 +2,8 @@
 using MediatR;
 using TagModel = TierListAPI.Entities.Models.Tag;
 using TierListAPI.Persistence.Repository;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 
 namespace TierListAPI.Features.Tag.GetAll;
 
@@ -13,7 +15,7 @@ public class GetAllTagHandler
 {
     public async Task<GetAllTagResponse> Handle(GetAllTagRequest request, CancellationToken cancellationToken)
     {
-        var tags = await tagRepository.GetAll(cancellationToken) ?? throw new Exception("Não foi possível buscar as tags.");
+        var tags = await tagRepository.GetAll(cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Tag);
 
         return mapper.Map<GetAllTagResponse>(tags);
     }

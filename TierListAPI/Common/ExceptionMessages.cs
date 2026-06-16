@@ -4,7 +4,12 @@ public static class ExceptionMessage
 {
     public static class BadRequest
     {
-        public const string Default = "Bad request";
+        public const string Default = "Bad request.";
+    }
+
+    public static class Ok
+    {
+        public const string Default = "Operação concluída com sucesso.";
     }
 
     public static class DuplicityModel
@@ -26,6 +31,7 @@ public static class ExceptionMessage
     public static class NotFound
     {
         public const string Default = "O item não foi encontrado.";
+        public const string Item = "Item não encontrado.";
         public const string Submission = "O grupo de respostas não foi encontrado.";
         public const string Tag = "A tag não foi encontrada.";
         public const string Tier = "O Tier não foi encontrado.";

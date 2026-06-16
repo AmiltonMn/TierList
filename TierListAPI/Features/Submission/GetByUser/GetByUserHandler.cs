@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.DTOs;
 using TierListAPI.Persistence.Repository;
 using TierListAPI.Persistence.Repository.Submission;
@@ -14,7 +16,7 @@ public class GetByUserHandler
 
     public async Task<GetByUserResponse> Handle(GetByUserRequest request, CancellationToken cancellationToken) 
     {
-        var submissions = submissionRepository.GetAllByUserId(request.UserId) ?? throw new Exception("Não foi encontrado nenhum grupo de respostas.");
+        var submissions = submissionRepository.GetAllByUserId(request.UserId) ?? throw new NotFoundException(ExceptionMessage.NotFound.Submission);
 
         var userSubmissions = submissions
             .Select(sm => new UserSubmission(sm.TierListTemplate!, sm))

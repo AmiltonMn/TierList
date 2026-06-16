@@ -3,6 +3,9 @@ using MediatR;
 using TierListAPI.Persistence.Repository;
 using SubmissionModel = TierListAPI.Entities.Models.TierListSubmission;
 using TierListAPI.Persistence.Repository.Submission;
+using Microsoft.AspNetCore.Http.HttpResults;
+using TierListAPI.Common.ExceptionMessages;
+using TierListAPI.Common;
 
 namespace TierListAPI.Features.Submission.Create;
 
@@ -16,7 +19,7 @@ public class SubmissionCreateHandler
     public async Task<SubmissionCreateResponse> Handle(SubmissionCreateRequest request, CancellationToken cancellationToken) 
     {
         if (request.TierListTemplateId == Guid.Empty || request.UserId == Guid.Empty)
-            throw new Exception("Dados insuficientes para criar um grupo de respostas.");
+            throw new BadRequestException(ExceptionMessage.BadRequest.Default);
 
         var submission = new SubmissionModel
         {

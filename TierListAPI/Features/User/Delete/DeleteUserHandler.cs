@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.User.Delete;
@@ -16,7 +18,7 @@ public class DeleteUserHandler (
     public async Task<DeleteUserResponse> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
     {
         Entities.Models.User user = await userRepository.GetById(request.Id, cancellationToken) 
-            ?? throw new Exception("Usuário não encontrado.");
+            ?? throw new NotFoundException(ExceptionMessage.NotFound.User);
 
         var DeletedUsers = await userRepository.GetAllByUsername("DeletedUser", cancellationToken);
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
@@ -17,7 +18,7 @@ public class GetAllByTierAndUserHandler
     public async Task<GetAllByTierAndUserResponse> Handle(GetAllByTierAndUserRequest request, CancellationToken cancellationToken) 
     {
         if (request.ItemId == Guid.Empty)
-            throw new DirectoryNotFoundException(ExceptionMessage.NotFound.UserAnswer);
+            throw new NotFoundException(ExceptionMessage.NotFound.UserAnswer);
 
         var answerList = userAnswerRepository.GetAllByItemId(request.ItemId);
         

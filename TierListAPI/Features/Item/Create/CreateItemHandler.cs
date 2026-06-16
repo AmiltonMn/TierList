@@ -2,6 +2,8 @@
 using MediatR;
 using ItemModel = TierListAPI.Entities.Models.Item;
 using TierListAPI.Persistence.Repository;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 
 namespace TierListAPI.Features.Item.Create;
 
@@ -14,10 +16,10 @@ public class CreateItemHandler (
     public async Task<CreateItemResponse> Handle(CreateItemRequest request, CancellationToken cancellationToken) 
     {
         if (itemRepository.GetItemsByName(request.Name, request.TierListTemplateId).Count > 0)
-            throw new Exception("Já existe um item com esse nome.");
+            throw new DuplicityException(ExceptionMessage.DuplicityModel.Item);
 
         if (request.ItemImage == "" || request.Name == "")
-            throw new Exception("É necessário passar ao menos um nome e um link de imagem!");
+            throw new BadRequestException("É necessário passar ao menos um nome e um link de imagem!");
 
         ItemModel item = new()
         {

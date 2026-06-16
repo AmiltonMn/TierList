@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.Tier.Update;
@@ -19,11 +21,11 @@ public class UpdateTierHandler(
     public async Task<UpdateTierResponse> Handle(UpdateTierRequest request, CancellationToken cancellationToken) 
     {
         if (string.IsNullOrWhiteSpace(request.Label))
-            throw new Exception("É necessário colocar um nome para o tier.");
+            throw new BadRequestException("É necessário colocar um nome para o tier.");
 
-        var tier = await tierRepository.GetById(request.Id, cancellationToken) ?? throw new Exception("Tier não encontrado.");
+        var tier = await tierRepository.GetById(request.Id, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Tier);
 
-        var tierListTemplate = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new Exception("O Tier List não foi encontrado.");
+        var tierListTemplate = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         tier.Color = request.Color;
         tier.Label = request.Label;

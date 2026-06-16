@@ -13,7 +13,6 @@ public class CreateUserAnswerHandler (
     IUserAnswerRepository userAnswerRepository,
     ITierListTemplateRepository tierListTemplateRepository,
     ITierRepository tierRepository,
-    IUserRepository userRepository,
     IItemRepository itemRepository,
     ISubmissionRepository submissionRepository,
     IUnitOfWork unitOfWork,
@@ -24,7 +23,6 @@ public class CreateUserAnswerHandler (
         var tierList = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         var tier = await tierRepository.GetById(request.TierId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Tier);
-        var user = await userRepository.GetById(request.UserId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.User);
         var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Default);
         var submission = await submissionRepository.GetById(request.SubmissionId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Submission);
 

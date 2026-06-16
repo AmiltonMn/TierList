@@ -3,6 +3,9 @@ using MediatR;
 using TierListAPI.Persistence.Repository;
 using UserModel = TierListAPI.Entities.Models.User;
 using BC = BCrypt.Net.BCrypt;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace TierListAPI.Features.User.Create;
 
@@ -20,10 +23,10 @@ public class CreateUserHandler (
         var existingUser = await userRepository.GetAllByUsername(request.Name, cancellationToken);
 
         if (existingUser is not null)
-            throw new Exception("Já existe um usuário com esse nome. Escolha outro nome.");
+            throw new DuplicityException(ExceptionMessage.DuplicityModel.User);
 
         if (request.Password.Length < 8 && !request.Password.Any(char.IsDigit))
-            throw new Exception("A senha deve conter pelo menos 8 caracteres e incluir um número.");
+            throw new BadRequestException("A senha deve conter pelo menos 8 caracteres e incluir um número.");
         
         var user = new UserModel
         {

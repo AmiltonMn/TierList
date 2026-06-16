@@ -2,6 +2,8 @@
 using MediatR;
 using ItemModel = TierListAPI.Entities.Models.Item;
 using TierListAPI.Persistence.Repository;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 
 namespace TierListAPI.Features.Item.Update;
 
@@ -14,7 +16,7 @@ public class UpdateItemHandler
 
     public async Task<UpdateItemResponse> Handle(UpdateItemRequest request, CancellationToken cancellationToken) 
     {
-        ItemModel item = itemRepository.GetById(request.ItemId, cancellationToken).Result ?? throw new Exception("Item não encontrado.");
+        ItemModel item = itemRepository.GetById(request.ItemId, cancellationToken).Result ?? throw new NotFoundException(ExceptionMessage.NotFound.Item);
 
         item.Name = request.Name;
         item.ItemImage = request.ItemImage;

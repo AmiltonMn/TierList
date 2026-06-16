@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.TierListTemplate.Delete;
@@ -16,12 +18,9 @@ public class DeleteTierListTemplateHandler(
     public async Task<DeleteTierListTemplateResponse> Handle(DeleteTierListTemplateRequest request, CancellationToken cancellationToken)
     {
         if (request.TemplateId == Guid.Empty) 
-            throw new Exception("ID nulo, por favor forneça um ID válido.");
+            throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
-        Entities.Models.TierListTemplate? tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken);
-
-        if (tierListTemplate == null)
-            throw new Exception("Tier List não encontrada");
+        Entities.Models.TierListTemplate? tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         tierListTemplate.IsDeleted = true;
         tierListTemplate.DeletedAt = DateTime.UtcNow;

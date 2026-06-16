@@ -24,7 +24,7 @@ public class UpdateUserhandler (
         var existingUser = await userRepository.GetAllByUsername(request.Name, cancellationToken);
 
         if (existingUser is not null && existingUser.Any(u => u.Id != request.UserId))
-            throw new DuplicityException("Já existe um usuário com esse nome. Escolha outro nome.");
+            throw new DuplicityException(ExceptionMessage.DuplicityModel.User);
 
         user.Name = request.Name;
         user.Bio = request.Bio;

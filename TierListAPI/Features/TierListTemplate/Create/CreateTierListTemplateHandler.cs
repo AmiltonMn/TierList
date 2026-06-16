@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using TierModel = TierListAPI.Entities.Models.Tier;
 using TierListAPI.Persistence.Repository;
+using TierListAPI.Common;
 
 namespace TierListAPI.Features.TierListTemplate.Create;
 public class CrteateTierListTemplateHandler(
@@ -20,10 +21,10 @@ public class CrteateTierListTemplateHandler(
     public async Task<CreateTierListTemplateResponse> Handle(CreateTierListTemplateRequest request, CancellationToken cancellationToken)
     {
         if(request.Name is null || request.Description is null)
-            throw new Exception("Para criar um template, é necessário um nome e uma descrição!");
+            throw new BadRequestException("Para criar um template, é necessário um nome e uma descrição!");
         
         if(request.Tags.Count == 0)
-            throw new Exception("Selecione pelo menos uma tag para criar um template");
+            throw new BadRequestException("Selecione pelo menos uma tag para criar um template");
 
         var tierListTemplate = new Entities.Models.TierListTemplate
         {
@@ -40,7 +41,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#FF7F7F",
             Position = 1,
             Points = 5,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -49,7 +50,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#ffbf7f",
             Position = 2,
             Points = 4,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -58,7 +59,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#ffdf7f",
             Position = 3,
             Points = 3,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -67,7 +68,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#ffff7f",
             Position = 4,
             Points = 2,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -76,7 +77,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#bfff7f",
             Position = 5,
             Points = 1,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -85,7 +86,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#7fff7f",
             Position = 6,
             Points = 0,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         tierListTemplate.Tiers.Add(new TierModel
@@ -94,7 +95,7 @@ public class CrteateTierListTemplateHandler(
             Color = "#7fbfff",
             Position = 7,
             Points = -1,
-            TierListId = tierListTemplate.Id
+            TierListTemplateId = tierListTemplate.Id
         });
 
         foreach (var tier in tierListTemplate.Tiers)

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 using TierListAPI.Persistence.Repository.Submission;
 
@@ -15,11 +17,11 @@ public class DeleteSubmissionHandler (
     public async Task<DeleteSubmissionResponse> Handle(DeleteSubmissionRequest request, CancellationToken cancellationToken) 
     {
         if (request.SubmissionId == Guid.Empty)
-            throw new Exception("Grupo de respostas não encontrado.");
+            throw new NotFoundException(ExceptionMessage.NotFound.Submission);
 
         await userAnswerRepository.DeleteAllBySubmissionId(request.SubmissionId);
 
-        var submission = submissionRepository.GetById(request.SubmissionId, cancellationToken).Result ?? throw new Exception("Grupo de respostas não encontrado no banco.");
+        var submission = submissionRepository.GetById(request.SubmissionId, cancellationToken).Result ?? throw new NotFoundException(ExceptionMessage.NotFound.Submission);
 
         submissionRepository.Delete(submission);
 

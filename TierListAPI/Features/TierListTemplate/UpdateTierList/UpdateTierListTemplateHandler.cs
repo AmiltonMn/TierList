@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.TierListTemplate.Update;
@@ -16,21 +18,18 @@ public class UpdateTierListTemplateHandler(
     public async Task<UpdateTierListTemplateResponse> Handle(UpdateTierListTemplateRequest request, CancellationToken cancellationToken)
     {
         if (request.TemplateId == Guid.Empty)
-            throw new Exception("ID nulo, insira um ID válido.");
+            throw new BadRequestException("ID nulo, insira um ID válido.");
 
         if (request.Name.IsWhiteSpace() || request.Name == "")
-            throw new Exception("Nome vazio, insira um nome válido.");
+            throw new BadRequestException("Nome vazio, insira um nome válido.");
 
         if (request.Description.IsWhiteSpace() || request.Description == "")
-            throw new Exception("Descrição vazia, insira uma descrição válida.");
+            throw new BadRequestException("Descrição vazia, insira uma descrição válida.");
 
         if (request.Tags.Count == 0)
-            throw new Exception("Selecione ao menos uma tag");
+            throw new BadRequestException("Selecione ao menos uma tag");
 
-        var tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken);
-
-        if (tierListTemplate is null)
-            throw new Exception("Tier List não encontrada.");
+        var tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         tierListTemplate.Name = request.Name;
         tierListTemplate.Description = request.Description;

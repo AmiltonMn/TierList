@@ -1,5 +1,8 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 using TierModel = TierListAPI.Entities.Models.Tier;
 
@@ -15,18 +18,15 @@ public class CreateTierHandler(
     public async Task<CreateTierResponse> Handle(CreateTierRequest request, CancellationToken cancellationToken) 
     {
         if (request.Label.IsWhiteSpace())
-            throw new Exception("Por favor, coloque ao menos uma letra no texto do tier.");
+            throw new BadRequestException("Coloque ao menos uma letra no texto do tier.");
 
         if (request.TierListId == Guid.Empty)
-            throw new Exception("Tier List inválido.");
+            throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
-        var tierListTemplate = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new Exception("Tier List não encontrado");
-
-        if (tierListTemplate == null)
-            throw new Exception("Erro ao buscar Tier List");
+        var tierListTemplate = await tierListTemplateRepository.GetById(request.TierListId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         if (tierListTemplate.Tiers.Count >= 8)
-            throw new Exception("Você atingiu o máximo de tiers que uma Tier List pode ter.");
+            throw new BadRequestException("Você atingiu o máximo de tiers que uma Tier List pode ter.");
 
         var position = tierListTemplate.Tiers.LastOrDefault()?.Position + 1 ?? 0;
 

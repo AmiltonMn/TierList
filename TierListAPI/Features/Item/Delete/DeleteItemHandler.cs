@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.Item.Delete;
@@ -14,9 +16,9 @@ public class DeleteItemHandler
     public async Task<DeleteItemResponse> Handle(DeleteItemRequest request, CancellationToken cancellationToken)
     {
         if (request.ItemId == Guid.Empty)
-            throw new Exception("Item inválido.");
+            throw new BadRequestException("Item inválido.");
 
-        var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new Exception("Item não encontrado.");
+        var item = await itemRepository.GetById(request.ItemId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.Item);
 
         itemRepository.Delete(item);
 
