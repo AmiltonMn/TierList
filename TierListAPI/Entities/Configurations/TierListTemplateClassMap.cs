@@ -26,6 +26,13 @@ public static class TierListTemplateClassMap
             .IsRequired()
             .HasMaxLength(500);
 
+        builder.Property(tlt => tlt.BannerImage)
+            .HasColumnName("banner_image")
+            .HasColumnType("VARCHAR(255)");
+
+        builder.Property(tlt => tlt.Version)
+            .HasColumnName("version");
+
         builder.Property(tlt => tlt.OwnerId)
             .HasColumnName("owner_id")
             .IsRequired();

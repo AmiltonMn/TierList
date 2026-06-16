@@ -7,16 +7,14 @@ public class TierListTemplateRepository(TierListDBContext dBContext)
     : BaseRepository<TierListTemplate>(dBContext), ITierListTemplateRepository
 {
     public List<TierListTemplate> GetByTagId(Guid tagId)
-        => context
+        => [.. context
             .TierListTemplates
-            .Where(tlt => tlt.Tags.Any(t => t.Id == tagId))
-            .ToList();
+            .Where(tlt => tlt.Tags.Any(t => t.Id == tagId))];
 
     public List<TierListTemplate> GetByUserId(Guid userId)
-        => context
+        => [.. context
             .TierListTemplates
-            .Where(tlt => tlt.OwnerId == userId && !tlt.IsPrivate)
-            .ToList();
+            .Where(tlt => tlt.OwnerId == userId && !tlt.IsPrivate)];
 
     public List<TierListTemplate> GetPaginatedTiers(int pageNumber, int pageSize, string? searchByName, Guid? tagId, Guid? userId, Guid loggedUserId)
     {
@@ -25,7 +23,7 @@ public class TierListTemplateRepository(TierListDBContext dBContext)
             .AsQueryable();
 
         if (!string.IsNullOrEmpty(searchByName))
-            query = query.Where(tlt => tlt.Name.Contains(searchByName));
+            query = query.Where(tlt => tlt.Name.Contains(searchByName, StringComparison.CurrentCultureIgnoreCase));
 
         if (tagId.HasValue)
             query = query.Where(tlt => tlt.Tags.Any(t => t.Id == tagId.Value));
@@ -35,9 +33,8 @@ public class TierListTemplateRepository(TierListDBContext dBContext)
         
         query = query.Where(tlt => !tlt.IsPrivate && tlt.OwnerId != loggedUserId);
 
-        return query
+        return [.. query
             .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
+            .Take(pageSize)];
     }
 }

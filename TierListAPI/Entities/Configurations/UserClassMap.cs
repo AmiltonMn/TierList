@@ -31,9 +31,11 @@ public static class UserClassMap
             .HasMaxLength(500);
 
         builder.Property(u => u.ProfileImage)
-            .HasColumnName("profile_image");
+            .HasColumnName("profile_image")
+            .HasColumnType("VARCHAR(255)");
 
         builder.Property(u => u.BannerImage)
-            .HasColumnName("banner_image");
+            .HasColumnName("banner_image")
+            .HasColumnType("VARCHAR(255)");
     });
 }

@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Entities.Models;
 using TierListAPI.Persistence.Repository;
 
@@ -15,7 +17,7 @@ public class GetByQueryTierListTemplateHandler(
     public async Task<GetByQueryTierListTemplateResponse> Handle(GetByQueryTierListTemplateRequest request, CancellationToken cancellationToken)
     {
         if (request.TemplateId == Guid.Empty)
-            throw new Exception("ID nulo, por favor insira um ID válido.");
+            throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
         var tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken);
 

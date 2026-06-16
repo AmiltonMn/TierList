@@ -1,17 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using MediatR;
-using TierListAPI.Entities.Models;
+using TagModel = TierListAPI.Entities.Models.Tag;
 
 namespace TierListAPI.Features.TierListTemplate.Create;
 
 public sealed record CreateTierListTemplateRequest(
-    [Required]
-    [MaxLength(100), MinLength(5)]
     string Name,
-    [Required]
-    [MaxLength(500), MinLength(10)]
     string Description,
     Guid UserId,
     bool IsPrivate,
-    List<Tag> Tags
+    List<TagModel> Tags
 ) : IRequest<CreateTierListTemplateResponse>;

@@ -1,5 +1,7 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.Common;
+using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.User.Get;
@@ -13,8 +15,8 @@ public class GetUserhandler (
     
     public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
     {
-        var user = userRepository.GetById(request.UserId, cancellationToken) 
-            ?? throw new Exception("Usuário não encontrado.");
+        var user = userRepository.GetById(request.UserId, cancellationToken)
+            ?? throw new NotFoundException(ExceptionMessage.NotFound.User);
 
         return mapper.Map<GetUserResponse>(user);
     }

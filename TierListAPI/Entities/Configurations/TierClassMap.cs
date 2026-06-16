@@ -34,13 +34,13 @@ public static class TierClassMap
             .HasColumnName("points")
             .IsRequired();
         
-        builder.Property(t => t.TierListId)
+        builder.Property(t => t.TierListTemplateId)
             .HasColumnName("tier_list_id")
             .IsRequired();
 
-        builder.HasOne(t => t.TierList)
+        builder.HasOne(t => t.TierListTemplate)
             .WithMany(tl => tl.Tiers)
-            .HasForeignKey(t => t.TierListId)
+            .HasForeignKey(t => t.TierListTemplateId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
 

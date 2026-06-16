@@ -1,0 +1,37 @@
+﻿using AutoMapper;
+using MediatR;
+using TierListAPI.Persistence.Repository;
+using SubmissionModel = TierListAPI.Entities.Models.TierListSubmission;
+using TierListAPI.Persistence.Repository.Submission;
+using Microsoft.AspNetCore.Http.HttpResults;
+using TierListAPI.Common.ExceptionMessages;
+using TierListAPI.Common;
+
+namespace TierListAPI.Features.Submission.Create;
+
+public class SubmissionCreateHandler 
+(
+    ISubmissionRepository submissionRepository,
+    IUnitOfWork unitOfWork,
+    IMapper mapper
+) : IRequestHandler<SubmissionCreateRequest, SubmissionCreateResponse> {
+
+    public async Task<SubmissionCreateResponse> Handle(SubmissionCreateRequest request, CancellationToken cancellationToken) 
+    {
+        if (request.TierListTemplateId == Guid.Empty || request.UserId == Guid.Empty)
+            throw new BadRequestException(ExceptionMessage.BadRequest.Default);
+
+        var submission = new SubmissionModel
+        {
+            TierListTemplateId = request.TierListTemplateId,
+            UserId = request.UserId,
+            TemplateVersion = request.TemplateVersion
+        };
+
+        submissionRepository.Add(submission);
+
+        await unitOfWork.Save(cancellationToken);
+
+        return mapper.Map<SubmissionCreateResponse>(submission);
+    }
+}

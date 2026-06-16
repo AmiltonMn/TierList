@@ -1,4 +1,4 @@
-using TierListAPI.Entities.Models;
+using TierListTemplateModel = TierListAPI.Entities.Models.TierListTemplate;
 
 namespace TierListAPI.Features.User.Get;
 
@@ -7,6 +7,6 @@ public sealed record GetUserResponse(
     string? Bio,
     string? ProfileImage,
     string? BannerImage,
-    List<Entities.Models.TierListTemplate> CreatedTierLists,
-    List<Entities.Models.TierListTemplate> AnsweredTierLists
+    List<TierListTemplateModel> CreatedTierLists,
+    List<TierListTemplateModel> AnsweredTierLists
 );

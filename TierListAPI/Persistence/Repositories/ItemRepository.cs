@@ -7,21 +7,28 @@ public class ItemRepository(TierListDBContext dBContext)
     : BaseRepository<Item>(dBContext), IItemRepository
 {
     public List<Item> GetByTierListTemplateId(Guid tierListTemplateId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.TierListId == tierListTemplateId)
-            .ToList();
+            .Where(i => i.TierListTemplateId == tierListTemplateId)];
 
     public List<Item> GetItemsByName(string name, Guid tierListTemplateId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.Name == name && i.TierListId == tierListTemplateId)
-            .ToList();
+            .Where(i => i.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase) && i.TierListTemplateId == tierListTemplateId)];
+
+    public List<Item> GetItemsByTier(Guid tierId)
+        => [.. context
+            .Items
+            .Where(i => i.TierId == tierId)];
+    public List<Item> GetItemsByTierAndUser(Guid TierId, Guid UserId)
+        => [.. context
+            .Items
+            .Where(i => context.UserAnswers.Any(ua => ua.TierId == TierId && ua.ItemId == i.Id))];
 
     public List<Item> GetNotAnsweredItens(Guid tierListTemplateId, Guid userId)
-        => context
+        => [.. context
             .Items
-            .Where(i => i.TierListId == tierListTemplateId)
-            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.UserId == userId))
-            .ToList();
+            .Where(i => !context.UserAnswers.Any(ua => ua.ItemId == i.Id && ua.Submission!.UserId == userId))];
+
+    
 }

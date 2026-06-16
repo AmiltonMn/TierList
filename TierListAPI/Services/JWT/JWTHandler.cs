@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TierListAPI.Entities.Models;
-using TierListAPI.Services.JWT;
 
 namespace TierListAPI.Services;
 

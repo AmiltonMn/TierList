@@ -9,5 +9,5 @@ public class TagRepository(TierListDBContext dBContext)
     public Tag? GetByName(string? name)
         => context
             .Tags
-            .FirstOrDefault(t => t.Label == name);
+            .FirstOrDefault(t => name == null || t.Label.Contains(name, StringComparison.CurrentCultureIgnoreCase));
 }
