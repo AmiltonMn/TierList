@@ -10,8 +10,8 @@ public class TierListDBContextFactory : IDesignTimeDbContextFactory<TierListDBCo
     public TierListDBContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<TierListDBContext>();
-        // optionsBuilder.UseSqlite("Data Source=TierList.db");
-        // TODO: Change to SQL Server
+
+        optionsBuilder.
 
         return new TierListDBContext(optionsBuilder.Options);
     }

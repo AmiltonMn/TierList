@@ -14,6 +14,7 @@ public class TierListDBContext(DbContextOptions<TierListDBContext> options) : Db
     public DbSet<UserAnswer> UserAnswers { get; set; }
     public DbSet<TierListSubmission> TierListSubmissions { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<TierListSubmission> TierListSubmission { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
