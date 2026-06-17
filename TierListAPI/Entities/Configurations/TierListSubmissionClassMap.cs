@@ -8,7 +8,7 @@ public static class TierListSubmissionClassMap
     public static void Map(this ModelBuilder modelBuilder)
         => modelBuilder.Entity<TierListSubmission>(builder =>
         {
-            builder.ToTable("tb_tierListSubmission");
+            builder.ToTable("tb_tier_list_submission");
 
             builder.HasKey(s => s.Id);
 
@@ -24,7 +24,7 @@ public static class TierListSubmissionClassMap
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(s => s.TierListTemplateId)
-                .HasColumnName("tierListTemplate_id");
+                .HasColumnName("tier_list_template_id");
 
             builder.HasOne(s => s.TierListTemplate)
                 .WithMany(t => t.Submissions)

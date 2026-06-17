@@ -22,6 +22,9 @@ public class DeleteTierListTemplateHandler(
 
         Entities.Models.TierListTemplate? tierListTemplate = await tierListTemplateRepository.GetById(request.TemplateId, cancellationToken) ?? throw new NotFoundException(ExceptionMessage.NotFound.TierListTemplate);
 
+        if (tierListTemplate.OwnerId != request.UserId)
+            throw new UnauthorizedException(ExceptionMessage.Unauthorized.Default);
+
         tierListTemplate.IsDeleted = true;
         tierListTemplate.DeletedAt = DateTime.UtcNow;
 

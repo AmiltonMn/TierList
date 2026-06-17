@@ -1,5 +1,6 @@
 using TierListAPI.Persistence.Repository;
 using TierListAPI.Entities.Models;
+using TierListAPI.Persistence.Context;
 
 namespace TierListAPI.Persistence.Repositories;
 

@@ -45,6 +45,6 @@ public static class ItemClassMap
             .WithMany(t => t.Items)
             .HasForeignKey(t => t.TierId)
             .OnDelete(DeleteBehavior.NoAction)
-            .IsRequired();
+            .IsRequired(false);
     });
 }

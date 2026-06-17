@@ -13,7 +13,7 @@ public static class TierListTemplateClassMap
         builder.HasKey(tlt => tlt.Id);
 
         builder.Property(tlt => tlt.Id)
-            .HasColumnName("tierListTemplate_id")
+            .HasColumnName("tier_list_template_id")
             .IsRequired();
 
         builder.Property(tlt => tlt.Name)

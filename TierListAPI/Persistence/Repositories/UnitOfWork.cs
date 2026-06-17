@@ -1,4 +1,5 @@
-﻿using TierListAPI.Persistence.Repository;
+﻿using TierListAPI.Persistence.Context;
+using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Persistence.Repositories;
 
@@ -6,6 +7,6 @@ public class UnitOfWork(TierListDBContext context) : IUnitOfWork
 {
     public async Task Save(CancellationToken cancellationToken)
     {
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(cancellationToken);
     }
 }
