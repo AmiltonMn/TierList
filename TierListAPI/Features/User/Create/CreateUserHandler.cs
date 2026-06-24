@@ -5,7 +5,6 @@ using UserModel = TierListAPI.Entities.Models.User;
 using BC = BCrypt.Net.BCrypt;
 using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace TierListAPI.Features.User.Create;
 

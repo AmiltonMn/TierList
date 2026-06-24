@@ -2,5 +2,6 @@
 
 public sealed record LoginResponse
 (
-    Guid UserId
+    Guid UserId,
+    string Token
 );

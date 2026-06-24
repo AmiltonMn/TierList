@@ -15,12 +15,10 @@ builder.Services.ConfigureCorsPolicy();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// Pegando os dados de JWT
 var jwtSecret = builder.Configuration["Jwt:Secret"] ?? throw new InvalidOperationException("Jwt:Secret não configurado em appsettings.json.");
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 var jwtAudience = builder.Configuration["Jwt:Audience"];
 
-// Config da autenticação do JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -64,5 +62,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.Run();

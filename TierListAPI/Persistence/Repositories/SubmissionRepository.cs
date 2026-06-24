@@ -10,7 +10,7 @@ public class SubmissionRepository(TierListDBContext dBContext)
 {
     public List<TierListSubmission> GetAllByUserId(Guid UserId)
         => [.. context
-            .TierListSubmissions
+            .TierListSubmission
             .Include (t => t.TierListTemplate)
             .Where(s => s.UserId == UserId)];
 }

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
 
-using TierListAPI.Features.User.Create;
 using TierListAPI.Features.User.Delete;
 using TierListAPI.Features.User.Get;
 using TierListAPI.Features.User.GetByUsername;
@@ -17,14 +16,6 @@ namespace TierListAPI.Controllers;
 [Route("user")]
 public class UserController(IMediator mediator) : BaseController
 {
-    [HttpPost("register")]
-    public async Task<ActionResult<CreateUserResponse>> Create([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
-    {
-        var response = await mediator.Send(request, cancellationToken);
-
-        return Ok(response);
-    }
-
     [HttpPut("update")]
     public async Task<ActionResult<UpdateUserResponse>> Update([FromBody] UpdateUserRequest request, CancellationToken cancellationToken) 
     {

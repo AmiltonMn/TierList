@@ -29,6 +29,4 @@ public class TierListTemplateController(IMediator mediator) : BaseController
 
         return Ok(response);
     }
-
-
 }
