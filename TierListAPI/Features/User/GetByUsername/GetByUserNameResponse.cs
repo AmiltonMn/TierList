@@ -1,7 +1,7 @@
-using UserModel = TierListAPI.Entities.Models.User;
+using TierListAPI.DTOs;
 
 namespace TierListAPI.Features.User.GetByUsername;
 
 public sealed record GetByUserNameResponse(
-    List<UserModel> Users
+    List<UserDto> Users
 );

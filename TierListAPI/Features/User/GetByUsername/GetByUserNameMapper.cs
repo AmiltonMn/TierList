@@ -1,11 +1,13 @@
 using AutoMapper;
+using TierListAPI.DTOs;
+using TierListAPI.Features.User.Get;
 
 namespace TierListAPI.Features.User.GetByUsername;
 
-public class GetUserMapper : Profile
+public class GetByUserNameMapper : Profile
 {
-    public GetUserMapper()
+    public GetByUserNameMapper()
     {
-        CreateMap<Entities.Models.User, GetByUserNameResponse>();
+        CreateMap<UserDto, GetUserResponse>();
     }
 }

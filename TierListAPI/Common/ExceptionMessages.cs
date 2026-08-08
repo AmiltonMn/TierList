@@ -25,7 +25,7 @@ public static class ExceptionMessage
 
     public static class InternalServerError
     {
-        public const string Default = "Erro internto";
+        public const string Default = "Erro interno";
     }
 
     public static class NotFound

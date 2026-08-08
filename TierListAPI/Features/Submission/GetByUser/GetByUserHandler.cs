@@ -4,7 +4,6 @@ using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.DTOs;
 using TierListAPI.Persistence.Repository;
-using TierListAPI.Persistence.Repository.Submission;
 
 namespace TierListAPI.Features.Submission.GetByUser;
 

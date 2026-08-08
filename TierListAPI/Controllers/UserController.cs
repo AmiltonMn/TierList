@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
-
+using TierListAPI.Enums;
 using TierListAPI.Features.User.Delete;
 using TierListAPI.Features.User.Get;
 using TierListAPI.Features.User.GetByUsername;
@@ -13,7 +13,7 @@ using TierListAPI.Features.User.Update;
 namespace TierListAPI.Controllers;
 
 [ApiController]
-[Route("user")]
+[Route(Routes.User)]
 public class UserController(IMediator mediator) : BaseController
 {
     [HttpPut("update")]
@@ -38,7 +38,7 @@ public class UserController(IMediator mediator) : BaseController
         return Ok(response);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("get/{id}")]
     public async Task<ActionResult<GetUserResponse>> Get([FromRoute] Guid id, CancellationToken cancellationToken) 
     {
         GetUserRequest request = new(id);
@@ -47,7 +47,7 @@ public class UserController(IMediator mediator) : BaseController
         return Ok(response);
     }
 
-    [HttpGet("users{username}")]
+    [HttpGet("users/{username}")]
     public async Task<ActionResult<GetByUserNameResponse>> GetByusername([FromRoute] string username, CancellationToken cancellationToken)
     {
         GetByUserNameRequest request = new(username);

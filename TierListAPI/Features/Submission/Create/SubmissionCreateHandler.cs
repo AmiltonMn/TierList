@@ -2,8 +2,6 @@
 using MediatR;
 using TierListAPI.Persistence.Repository;
 using SubmissionModel = TierListAPI.Entities.Models.TierListSubmission;
-using TierListAPI.Persistence.Repository.Submission;
-using Microsoft.AspNetCore.Http.HttpResults;
 using TierListAPI.Common.ExceptionMessages;
 using TierListAPI.Common;
 

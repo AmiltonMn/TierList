@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TierListAPI.Enums;
 using TierListAPI.Features.User.Create;
 using TierListAPI.Features.User.Login;
 
 namespace TierListAPI.Controllers;
 
 [ApiController]
-[Route("auth")]
+[Route(Routes.Auth)]
 public class AuthController(IMediator mediator) : BaseController
 {
     [HttpPost("register")]

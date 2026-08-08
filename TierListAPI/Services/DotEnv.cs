@@ -2,7 +2,7 @@
 
 public class DotEnv
 {
-    public static void Load(string filePath = "../.env") 
+    public static void Load(string filePath = ".env") 
     {
         if (!File.Exists(filePath)) return;
 

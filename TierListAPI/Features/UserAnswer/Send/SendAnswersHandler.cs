@@ -10,7 +10,7 @@ namespace TierListAPI.Features.UserAnswer.Send;
 public class SendAnswersHandler
 (
     IUserAnswerRepository userAnswerRepository,
-    ItemRepository itemRepository,
+    IItemRepository itemRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper
 ) : IRequestHandler<SendAnswersRequest, SendAnswersResponse>

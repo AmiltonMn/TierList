@@ -2,7 +2,6 @@
 using TierListAPI.Persistence.Context;
 using TierListAPI.Persistence.Repositories;
 using TierListAPI.Persistence.Repository;
-using TierListAPI.Persistence.Repository.Submission;
 
 namespace TierListAPI.Services;
 
@@ -27,11 +26,18 @@ public static class ServiceExtensions
         services.AddScoped<ISubmissionRepository, SubmissionRepository>();
     }
 
-    public static void ConfigureApplication(this IServiceCollection services) 
+    public static void ConfigureApplication(this IServiceCollection services)
     {
-        services.AddAutoMapper(config => { }, typeof(Program).Assembly);
+        services.AddAutoMapper(config => {
+            config.LicenseKey = DotEnv.Get("LICENSE_KEY");
+        }, typeof(Program).Assembly);
 
-        services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        services.AddMediatR(config =>
+        {
+            config.LicenseKey = DotEnv.Get("LICENSE_KEY");
+
+            config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+        });
 
         services.AddScoped<IAutheticator, JWTHandler>();
     }

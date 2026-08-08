@@ -1,13 +1,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TierListAPI.Enums;
 using TierListAPI.Features.TierListTemplate.Create;
 using TierListAPI.Features.TierListTemplate.Delete;
 
 namespace TierListAPI.Controllers;
 
 [ApiController]
-[Route("TierListTemplate")]
+[Route(Routes.Template)]
 public class TierListTemplateController(IMediator mediator) : BaseController
 {
     [Authorize]

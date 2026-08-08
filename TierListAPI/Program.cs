@@ -48,6 +48,11 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseExceptionMiddleware();
 
+DotEnv.Load();
+var connectionString = DotEnv.Get("DATABASE_URL");
+
+Console.WriteLine($"Connection string: {connectionString}");
+
 var serviceScope = app.Services.CreateScope();
 var context = serviceScope.ServiceProvider.GetRequiredService<TierListDBContext>()
     ?? throw new InvalidOperationException("Failed to resolve context from service provider.");

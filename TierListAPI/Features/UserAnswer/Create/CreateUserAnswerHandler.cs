@@ -2,9 +2,7 @@
 using MediatR;
 using TierListAPI.Common;
 using TierListAPI.Common.ExceptionMessages;
-using TierListAPI.Persistence.Repositories;
 using TierListAPI.Persistence.Repository;
-using TierListAPI.Persistence.Repository.Submission;
 using UserAnswerModel = TierListAPI.Entities.Models.UserAnswer;
 
 namespace TierListAPI.Features.UserAnswer.Create;

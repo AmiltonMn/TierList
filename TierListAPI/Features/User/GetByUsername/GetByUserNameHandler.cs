@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using TierListAPI.DTOs;
 using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Features.User.GetByUsername;
@@ -23,6 +24,8 @@ public class GetByUserNameHandler (
             users = await userRepository.GetAllByUsername(request.Name, cancellationToken);
         }
 
-        return mapper.Map<GetByUserNameResponse>(users);
+        var userDtos = mapper.Map<List<UserDto>>(users);
+
+        return new GetByUserNameResponse(userDtos);
     }
 }

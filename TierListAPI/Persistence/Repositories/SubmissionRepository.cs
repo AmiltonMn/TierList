@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TierListAPI.Entities.Models;
 using TierListAPI.Persistence.Context;
-using TierListAPI.Persistence.Repository.Submission;
+using TierListAPI.Persistence.Repository;
 
 namespace TierListAPI.Persistence.Repositories;
 

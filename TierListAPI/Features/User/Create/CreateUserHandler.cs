@@ -21,7 +21,7 @@ public class CreateUserHandler (
     {
         var existingUser = await userRepository.GetAllByUsername(request.Name, cancellationToken);
 
-        if (existingUser is not null)
+        if (existingUser.Count >= 1)
             throw new DuplicityException(ExceptionMessage.DuplicityModel.User);
 
         if (request.Password.Length < 8 && !request.Password.Any(char.IsDigit))
@@ -33,7 +33,8 @@ public class CreateUserHandler (
             Password = BC.HashPassword(request.Password),
             Bio = request.Bio,
             ProfileImage = request.ProfileImage,
-            BannerImage = request.BannerImage
+            BannerImage = request.BannerImage,
+            CreatedAt = DateTimeOffset.UtcNow
         };
 
         userRepository.Add(user);

@@ -11,7 +11,7 @@ public class UserRepository(TierListDBContext dBContext)
     public Task<List<User>> GetAllByUsername(string username, CancellationToken cancellationToken)
         => context
             .Users
-            .Where(u => u.Name.Contains(username, StringComparison.CurrentCultureIgnoreCase))
+            .Where(u => u.Name.ToLower().Contains(username))
             .ToListAsync(cancellationToken);
 
     public Task<User> GetByUsername(string username, CancellationToken cancellationToken)

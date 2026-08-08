@@ -1,6 +1,6 @@
 ﻿using TierListAPI.Entities.Models;
 
-namespace TierListAPI.Persistence.Repository.Submission;
+namespace TierListAPI.Persistence.Repository;
 
 public interface ISubmissionRepository : IRepository<TierListSubmission> 
 {
